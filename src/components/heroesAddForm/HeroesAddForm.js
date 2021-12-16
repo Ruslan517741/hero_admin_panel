@@ -1,4 +1,10 @@
+import { useState, useEffect } from "react";
+import {useHttp} from '../../hooks/http.hook';
+import { v4 as uuidv4 } from 'uuid';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { heroAdd, heroesFetchingError } from '../../actions';
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -11,8 +17,67 @@
 // данных из фильтров
 
 const HeroesAddForm = () => {
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [element, setElement] = useState('');
+
+    const {heroes} = useSelector(state => state);
+    const dispatch = useDispatch();
+    const {request} = useHttp();
+
+    const onValueChange = (e) => {
+        e.preventDefault();
+
+        const createdHero = {
+            id: uuidv4(),
+            name, 
+            description,
+            element
+        }
+
+        const newHeroes = [...heroes, createdHero];
+
+        dispatch(heroAdd(newHeroes));
+
+        request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(createdHero))
+            .catch(() => dispatch(heroesFetchingError()))
+
+        console.log(newHeroes);  
+    }
+    
+    const [filters, setFilters] = useState();
+    
+
+    useEffect(() => {
+        request(`http://localhost:3001/filters`)
+            .then(data => setFilters(data.splice(1, 4)))
+            .catch(() => dispatch(heroesFetchingError()))
+    }, []);
+
+    const createOptions = (filters) => {
+        const options = filters.map((item, i) => {
+            return (
+                <option value={item.name}>{item.label}</option>
+            )
+        })
+
+        return (
+            <select 
+                required
+                className="form-select" 
+                id="element" 
+                name="element"
+                onChange={(e) => {setElement(e.target.value)}}>
+                {options}
+            </select>
+            
+        )
+    }
+
+    console.log(filters);
+
     return (
-        <form className="border p-4 shadow-lg rounded">
+        <form className="border p-4 shadow-lg rounded" onSubmit={onValueChange}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
                 <input 
@@ -21,7 +86,9 @@ const HeroesAddForm = () => {
                     name="name" 
                     className="form-control" 
                     id="name" 
-                    placeholder="Как меня зовут?"/>
+                    placeholder="Как меня зовут?"
+                    value={name}
+                    onChange={(e) => {setName(e.target.value)}}/>
             </div>
 
             <div className="mb-3">
@@ -32,7 +99,9 @@ const HeroesAddForm = () => {
                     className="form-control" 
                     id="text" 
                     placeholder="Что я умею?"
-                    style={{"height": '130px'}}/>
+                    style={{"height": '130px'}}
+                    value={description}
+                    onChange={(e) => {setDescription(e.target.value)}}/>
             </div>
 
             <div className="mb-3">
@@ -41,13 +110,17 @@ const HeroesAddForm = () => {
                     required
                     className="form-select" 
                     id="element" 
-                    name="element">
-                    <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    name="element"
+                    onChange={(e) => {setElement(e.target.value)}}>
+                        
+                    {/* <option >Я владею элементом...</option>
+                    <option value={filters[0]}>Огонь</option>
+                    <option value={filters[2]}>Вода</option>
+                    <option value={filters[3]}>Ветер</option>
+                    <option value={filters[4]}>Земля</option> */}
+                    
                 </select>
+                {() => createOptions(filters)}
             </div>
 
             <button type="submit" className="btn btn-primary">Создать</button>

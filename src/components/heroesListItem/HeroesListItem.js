@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+
 
 const HeroesListItem = ({name, description, element, id, onDelete}) => {
     let elementClassName;

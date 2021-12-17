@@ -2,7 +2,7 @@ const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
     filters: [],
-    selectedFilter: ''
+    selectedFilter: 'all'
 }
 
 const reducer = (state = initialState, action) => {

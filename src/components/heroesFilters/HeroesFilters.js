@@ -8,17 +8,16 @@
 import { useState, useEffect } from "react";
 import {useHttp} from '../../hooks/http.hook';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 import { selectFilter, heroesFetchingError } from '../../actions';
 
 const HeroesFilters = () => {
-    const {selectedFilter} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
     const [filterList, setFilterList] = useState([]);
-    const [activeFilter, setActiveFilter] = useState({id: 0, label: ''});
+    const [activeFilter, setActiveFilter] = useState(0);
     
     
     useEffect(() => {
@@ -41,20 +40,20 @@ const HeroesFilters = () => {
         dispatch(filterHeroes(filteredList))
         console.log(filterHeroesList);
     } */
-    
-    const filterButtons = filterList.map((item, i) => {
-        const {id, className, label, name} = item;
+    console.log(filterList)
+    const filterButtons = filterList.map(item => {
+        const {className, label, name} = item;
         let fullClassName;
-        if (activeFilter.id === id) {
-        fullClassName = `${className} active`;
+        if (activeFilter === name) {
+            fullClassName = `${className} active`;
         } else {
             fullClassName = className;
         }
         return (
-            <button key={i} 
-                    id={id} 
+            <button key={name} 
+                    id={name} 
                     className={fullClassName} 
-                    onClick={() => {setActiveFilter({id, name}); dispatch(selectFilter(activeFilter.name))}}>
+                    onClick={() => {setActiveFilter(name); dispatch(selectFilter(name))}}>
                     {label}
             </button>
         )

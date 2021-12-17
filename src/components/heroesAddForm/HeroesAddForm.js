@@ -21,10 +21,11 @@ const HeroesAddForm = () => {
     const [description, setDescription] = useState('');
     const [element, setElement] = useState('');
 
-    const {heroes} = useSelector(state => state);
+    const {heroes, selectedFilter} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
+    console.log(selectedFilter);
     const onValueChange = (e) => {
         e.preventDefault();
 
@@ -45,36 +46,21 @@ const HeroesAddForm = () => {
         console.log(newHeroes);  
     }
     
-    const [filters, setFilters] = useState();
+    const [filters, setFilters] = useState([]);
     
 
     useEffect(() => {
         request(`http://localhost:3001/filters`)
             .then(data => setFilters(data.splice(1, 4)))
             .catch(() => dispatch(heroesFetchingError()))
+            // eslint-disable-next-line
     }, []);
 
-    const createOptions = (filters) => {
-        const options = filters.map((item, i) => {
-            return (
-                <option value={item.name}>{item.label}</option>
-            )
-        })
-
+    const options = filters.map((item, i) => {
         return (
-            <select 
-                required
-                className="form-select" 
-                id="element" 
-                name="element"
-                onChange={(e) => {setElement(e.target.value)}}>
-                {options}
-            </select>
-            
+            <option key={i} value={item.name}>{item.label}</option>
         )
-    }
-
-    console.log(filters);
+    })
 
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={onValueChange}>
@@ -112,7 +98,8 @@ const HeroesAddForm = () => {
                     id="element" 
                     name="element"
                     onChange={(e) => {setElement(e.target.value)}}>
-                        
+                    <option >Я владею элементом...</option>
+                    {options} 
                     {/* <option >Я владею элементом...</option>
                     <option value={filters[0]}>Огонь</option>
                     <option value={filters[2]}>Вода</option>
@@ -120,7 +107,6 @@ const HeroesAddForm = () => {
                     <option value={filters[4]}>Земля</option> */}
                     
                 </select>
-                {() => createOptions(filters)}
             </div>
 
             <button type="submit" className="btn btn-primary">Создать</button>

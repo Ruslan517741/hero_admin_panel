@@ -78,8 +78,6 @@ const HeroesList = () => {
             return <HeroesListItem key={id} id={id} onDelete={onDelete} {...props}/>
         })
     }
-
-    
     
     const elements = renderHeroesList(heroes);
     

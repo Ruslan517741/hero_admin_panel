@@ -30,3 +30,17 @@ export const heroAdd = (newHero) => {
         payload: newHero
     }
 }
+
+/* export const filterHeroes = (filteredHeroes) => {
+    return {
+        type: 'HEROES_FILTERED',
+        payload: filteredHeroes
+    }
+} */
+
+export const selectFilter = (selectedFilter) => {
+    return {
+        type: 'HEROES_FILTER',
+        payload: selectedFilter
+    }
+}

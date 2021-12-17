@@ -21,11 +21,10 @@ const HeroesAddForm = () => {
     const [description, setDescription] = useState('');
     const [element, setElement] = useState('');
 
-    const {heroes, selectedFilter} = useSelector(state => state);
+    const {heroes} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
-    console.log(selectedFilter);
     const onValueChange = (e) => {
         e.preventDefault();
 

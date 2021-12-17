@@ -47,11 +47,9 @@ const HeroesFilters = () => {
         let fullClassName;
         if (activeFilter.id === id) {
         fullClassName = `${className} active`;
-        /* console.log(selectedFilter); */
         } else {
             fullClassName = className;
         }
-       /*  dispatch(selectFilter(activeFilter.label)) */
         return (
             <button key={i} 
                     id={id} 

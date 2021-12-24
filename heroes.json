@@ -13,75 +13,21 @@
       "element": "wind"
     },
     {
-      "id": "ec3e1a8a-c5c1-4af8-b070-ad433bf3301c",
-      "name": "asd",
-      "description": "asd",
-      "element": "wind"
-    },
-    {
-      "id": "766ab04b-e4cd-4e59-b1fe-1e01fc59df0e",
-      "name": "dsf",
-      "description": "sdf",
+      "id": 3,
+      "name": "Морской герой",
+      "description": "Как аквамен, но не из DC",
       "element": "water"
     },
     {
-      "id": "11902d95-a30f-4214-bb9e-4c4279291ef5",
-      "name": "ыа",
-      "description": "ыва",
+      "id": "2352573f-a575-47f3-8f81-8774d441c7d7",
+      "name": "asd",
+      "description": "фыывф",
       "element": "fire"
     },
     {
-      "id": "54baf7e6-4f8a-4cd0-b6d5-f379ecf9a465",
-      "name": "sdf",
-      "description": "sdf",
-      "element": "earth"
-    },
-    {
-      "id": "f2cf9465-ccb9-46fc-84b2-fa09b1e6923c",
-      "name": "sdf",
-      "description": "sdf",
-      "element": "earth"
-    },
-    {
-      "id": "6d92fa1c-be97-4996-90f1-788e7e7f7b55",
-      "name": "sdf",
-      "description": "sdf",
-      "element": "water"
-    },
-    {
-      "id": "26b65483-669d-41a8-9124-64af544f8ace",
-      "name": "sdf",
-      "description": "sdf",
-      "element": "Я владею элементом..."
-    },
-    {
-      "id": "f2496dbd-91f4-46ef-b963-ee2ceeefb296",
-      "name": "sd",
-      "description": "sd",
-      "element": ""
-    },
-    {
-      "id": "b4cacd35-fa24-426b-899e-e21a26544d24",
-      "name": "sd",
-      "description": "sd",
-      "element": "water"
-    },
-    {
-      "id": "f5aafa4f-9c67-4830-857a-ea29b01a95f9",
-      "name": "sd",
-      "description": "sd",
-      "element": "water"
-    },
-    {
-      "id": "1a0c1ab4-3692-46e5-8a36-1d196ff242c8",
-      "name": "sd",
-      "description": "sd",
-      "element": "water"
-    },
-    {
-      "id": "01d90d04-8c05-412a-b1ee-a5cd29ff87ff",
-      "name": "sd",
-      "description": "sd",
+      "id": "e05f7c03-9bf3-4177-b811-8accc5dc1fa0",
+      "name": "ыфв",
+      "description": "фыв",
       "element": "water"
     }
   ],

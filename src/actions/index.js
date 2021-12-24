@@ -1,4 +1,21 @@
-export const heroesFetching = () => {
+import {heroesFetched, heroesFetchingError, heroesFetching} from '../components/heroesList/heroesSlice';
+import {filtersFetched, filtersFetching, filtersFetchingError} from '../components/heroesFilters/filtersSlice';
+
+export const fetchHeroes = (request) => (dispatch) => {
+    dispatch(heroesFetching());
+    request("http://localhost:3001/heroes")
+        .then(data => dispatch(heroesFetched(data)))
+        .catch(() => dispatch(heroesFetchingError()))
+}
+
+export const fetchFilters = (request) => (dispatch) => {
+    dispatch(filtersFetching());
+    request("http://localhost:3001/filters")
+        .then(data => dispatch(filtersFetched(data)))
+        .catch(() => dispatch(filtersFetchingError()))
+}
+
+/* export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'
     }
@@ -15,32 +32,46 @@ export const heroesFetchingError = () => {
     return {
         type: 'HEROES_FETCHING_ERROR'
     }
-}
+} */
 
-export const heroDelete = (heroes) => {
+
+
+/* export const filtersFetching = () => {
     return {
-        type: 'HERO_DELETE',
-        payload: heroes
+        type: 'FILTERS_FETCHING'
     }
 }
 
-export const heroAdd = (newHero) => {
+export const filtersFetched = (filters) => {
     return {
-        type: 'HERO_ADD',
-        payload: newHero
+        type: 'FILTERS_FETCHED',
+        payload: filters
     }
 }
 
-/* export const filterHeroes = (filteredHeroes) => {
+export const filtersFetchingError = () => {
     return {
-        type: 'HEROES_FILTERED',
-        payload: filteredHeroes
+        type: 'FILTERS_FETCHING_ERROR'
+    }
+}
+
+export const activeFilterChanged = (filter) => {
+    return {
+        type: 'ACTIVE_FILTER_CHANGED',
+        payload: filter
     }
 } */
 
-export const selectFilter = (selectedFilter) => {
+/* export const heroCreated = (hero) => {
     return {
-        type: 'HEROES_FILTER',
-        payload: selectedFilter
+        type: 'HERO_CREATED',
+        payload: hero
     }
 }
+
+export const heroDeleted = (id) => {
+    return {
+        type: 'HERO_DELETED',
+        payload: id
+    }
+} */
